@@ -1,0 +1,48 @@
+# search_engine.py
+
+import time
+import bisect
+
+# Example dataset: hydration + medicine reminders
+reminders = [
+    {"name": "Drink Water", "time": "08:00"},
+    {"name": "Take Vitamin C", "time": "09:00"},
+    {"name": "Medicine A", "time": "12:00"},
+    {"name": "Medicine B", "time": "18:00"}
+]
+
+# --- Linear Search ---
+def linear_search(data, target):
+    start = time.time()
+    found = any(r["name"] == target for r in data)
+    elapsed = time.time() - start
+    print(f"Linear Search: {'Found' if found else 'Not Found'} in {elapsed:.6f} seconds")
+
+# --- Binary Search (requires sorted list of names) ---
+def binary_search(data, target):
+    names = sorted([r["name"] for r in data])
+    start = time.time()
+    index = bisect.bisect_left(names, target)
+    found = index < len(names) and names[index] == target
+    elapsed = time.time() - start
+    print(f"Binary Search: {'Found' if found else 'Not Found'} in {elapsed:.6f} seconds")
+
+# --- Hash Search (fastest) ---
+def hash_search(data_set, target):
+    start = time.time()
+    found = target in data_set
+    elapsed = time.time() - start
+    print(f"Hash Search: {'Found' if found else 'Not Found'} in {elapsed:.6f} seconds")
+
+# --- Sort reminders chronologically ---
+def sort_reminders(data):
+    start = time.time()
+    sorted_data = sorted(data, key=lambda r: r["time"])
+    elapsed = time.time() - start
+    print(f"Sorted reminders: {sorted_data} (took {elapsed:.6f} seconds)")
+
+# Run tests
+linear_search(reminders, "Medicine A")
+binary_search(reminders, "Medicine A")
+hash_search({r["name"] for r in reminders}, "Medicine A")
+sort_reminders(reminders)

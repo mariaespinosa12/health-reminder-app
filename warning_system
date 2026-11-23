@@ -1,0 +1,15 @@
+# remindermed Warning System
+
+import builtins
+print = builtins.print
+
+reminders_sent = 8
+missed_reminders = 3
+max_reminders_per_day = 10
+
+if reminders_sent >= max_reminders_per_day:
+    print("ALERT: Daily reminder limit reached!")
+elif missed_reminders > 5:
+    print("WARNING: Too many missed reminders today!")
+else:
+    print("Reminder system running smoothly.")

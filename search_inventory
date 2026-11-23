@@ -1,0 +1,12 @@
+# search_engine.py
+
+def search_inventory(reminders, query):
+    """
+    Search through a list of Reminder objects for matches.
+    Returns a list of reminders where the task or time contains the query.
+    """
+    results = []
+    for r in reminders:
+        if query.lower() in r.task.lower() or query.lower() in r.time.lower():
+            results.append(r)
+    return results
